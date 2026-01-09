@@ -9,3 +9,4 @@ python-multipart==0.0.6
 tensorflow==2.15.0
 requests==2.31.0
 matplotlib==3.8.2
+setuptools>=65.0.0

@@ -34,9 +34,14 @@ Fill in the following settings:
 ### Basic Settings:
 - **Name**: `facial-recognition-backend` (or your preferred name)
 - **Environment**: Select **"Python 3"**
-- **Python Version**: Render will auto-detect from `runtime.txt` (Python 3.9)
+- **Python Version**: **IMPORTANT** - Manually set to `3.9.18` in Render settings (or Render will auto-detect from `runtime.txt` in backend folder)
 - **Region**: Choose closest to you (e.g., `Oregon (US West)`)
 - **Branch**: `main` (or your default branch)
+
+**⚠️ CRITICAL**: If `runtime.txt` isn't detected, manually set Python version:
+1. After creating service, go to **Settings** → **Environment**
+2. Add environment variable: `PYTHON_VERSION` = `3.9.18`
+3. Or in **Build & Deploy** settings, specify Python version directly
 
 ### ⚠️ CRITICAL: Root Directory
 - **Root Directory**: `backend` 
