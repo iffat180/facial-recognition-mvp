@@ -67,12 +67,26 @@ Fill in the following settings:
 - **Free**: 512MB RAM (sufficient for MVP)
 - **Starter**: $7/month (if you need more resources)
 
-## Step 5: Environment Variables (Optional)
+## Step 5: Set Python Version (CRITICAL!)
 
-Click **"Advanced"** → **"Environment Variables"**:
+**⚠️ IMPORTANT**: Render might not auto-detect `runtime.txt`. You MUST manually set Python version:
 
-- `PYTHON_VERSION`: `3.9` (optional, Render auto-detects)
-- Add any other variables your app needs
+### Option A: In Service Settings (Recommended)
+1. After creating the service, go to **Settings** tab
+2. Scroll to **"Build & Deploy"** section
+3. Find **"Python Version"** field
+4. Enter: `3.9.18` or just `3.9`
+5. Click **"Save Changes"**
+6. Render will redeploy automatically
+
+### Option B: Environment Variable
+1. Go to **"Environment"** tab
+2. Click **"Add Environment Variable"**
+3. Key: `PYTHON_VERSION`
+4. Value: `3.9.18`
+5. Click **"Save Changes"**
+
+**Note**: The `runtime.txt` file in the `backend/` folder should work, but if Render still uses Python 3.13, manually set it as above.
 
 ## Step 6: Deploy
 
