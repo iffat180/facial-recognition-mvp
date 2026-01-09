@@ -10,7 +10,7 @@ class FrameData(BaseModel):
 
 class EnrollmentRequest(BaseModel):
     """Request model for face enrollment"""
-    frames: List[FrameData] = Field(..., min_length=1, description="List of frames with pose labels and images")
+    frames: List[FrameData] = Field(..., min_items=1, description="List of frames with pose labels and images")
 
 
 class VerificationRequest(BaseModel):
