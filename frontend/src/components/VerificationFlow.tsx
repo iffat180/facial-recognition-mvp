@@ -78,6 +78,10 @@ export const VerificationFlow: React.FC = () => {
           )}
         </div>
       </div>
+      
+      <div className="test-enrollment-link">
+        <p>Enrolled user detected. Testing real-time verification.</p>
+      </div>
     </div>
   );
 };

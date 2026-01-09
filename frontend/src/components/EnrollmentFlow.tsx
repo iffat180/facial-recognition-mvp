@@ -91,6 +91,9 @@ export const EnrollmentFlow: React.FC<{ onComplete: () => void }> = ({ onComplet
     setError(null);
     
     try {
+      // Show helpful message for first-time model download
+      console.log('Enrolling user... This may take 1-2 minutes on first use while models download.');
+      
       const result = await enrollUser(capturedFrames);
       
       if (result.success) {
@@ -103,6 +106,7 @@ export const EnrollmentFlow: React.FC<{ onComplete: () => void }> = ({ onComplet
       const errorMessage = err instanceof Error ? err.message : 'Network error. Make sure the backend is running.';
       setError(errorMessage);
       console.error('Enrollment error:', err);
+      handleRetake();
     } finally {
       setIsProcessing(false);
     }
@@ -193,7 +197,7 @@ export const EnrollmentFlow: React.FC<{ onComplete: () => void }> = ({ onComplet
 
           {/* Action Buttons */}
           <div className="actions-single">
-            <button onClick={handleRetake} className="btn-secondary-single">
+            <button onClick={handleRetake} className="btn-secondary-single" disabled={isProcessing}>
               Retake All
             </button>
             <button 
@@ -204,6 +208,13 @@ export const EnrollmentFlow: React.FC<{ onComplete: () => void }> = ({ onComplet
               {isProcessing ? 'Processing...' : 'Complete Enrollment'}
             </button>
           </div>
+          
+          {/* Processing status message */}
+          {isProcessing && (
+            <p className="processing-note">
+              Please wait... This may take 1-2 minutes on first use.
+            </p>
+          )}
         </>
       )}
     </div>
