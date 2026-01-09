@@ -23,12 +23,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application code
 COPY . .
 
-# Copy and set permissions for startup script
-COPY start.sh /start.sh
-RUN chmod +x /start.sh
-
 # Expose port (Railway sets PORT dynamically)
 EXPOSE 8000
 
-# Start command - use startup script that handles PORT variable
-CMD ["/start.sh"]
+# Start command - use Python entrypoint that reads PORT environment variable
+CMD ["python", "entrypoint.py"]
