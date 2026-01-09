@@ -30,17 +30,28 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Initialize components
-face_processor = FaceProcessor()
+# Initialize storage (lightweight)
 storage = EnrollmentStorage(storage_dir=Path("./face_data"))
+
+# Lazy load face processor (to avoid blocking startup with model downloads)
+_face_processor = None
+
+def get_face_processor():
+    """Lazy initialization of FaceProcessor"""
+    global _face_processor
+    if _face_processor is None:
+        print("Initializing FaceProcessor (downloading models if needed)...")
+        _face_processor = FaceProcessor()
+        print("FaceProcessor ready.")
+    return _face_processor
 
 
 @app.on_event("startup")
 async def startup_event():
     """Warm up models on startup"""
     print("Starting up Face Recognition MVP backend...")
-    # Models are already warmed up in FaceProcessor.__init__
     print("Startup complete. Ready to accept requests.")
+    print("Note: DeepFace models will be downloaded on first use.")
 
 
 @app.post("/enroll", response_model=SuccessResponse)
@@ -75,7 +86,7 @@ async def enroll(request: EnrollmentRequest):
             image_data = base64.b64decode(image_str)
             
             # Process frame
-            result = face_processor.process_frame(image_data, frame.pose)
+            result = get_face_processor().process_frame(image_data, frame.pose)
             
             if result['error'] is not None:
                 errors.append(f"Frame {idx + 1} ({frame.pose}): {result['error']}")
@@ -143,7 +154,7 @@ async def verify(request: VerificationRequest):
             raise HTTPException(status_code=500, detail="Failed to load stored embeddings")
         
         # Verify face
-        is_match, similarity, message = face_processor.verify_face(
+        is_match, similarity, message = get_face_processor().verify_face(
             image_data,
             stored_embeddings,
             threshold=0.6
@@ -230,4 +241,17 @@ async def root():
             "status": "GET /status",
             "delete": "DELETE /enrollment"
         }
+    }
+
+
+@app.get("/health")
+async def health_check():
+    """
+    Simple health check endpoint for Render
+    Returns immediately without loading models
+    """
+    return {
+        "status": "healthy",
+        "service": "Face Recognition MVP",
+        "version": "1.0.0"
     }
