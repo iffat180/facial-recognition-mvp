@@ -1,0 +1,1910 @@
+/* CSS Variables for Auralen Theme */
+:root {
+  --bg-primary: #0f0f1e;
+  --bg-secondary: #1a1a2e;
+  --bg-card: #252541;
+  --bg-card-hover: #2d2d4a;
+  
+  --accent-purple: #764ba2;
+  --accent-cyan: #0f4c75;
+  --accent-success: #4ade80;
+  --accent-error: #f87171;
+  
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  
+  --border-color: rgba(148, 163, 184, 0.1);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+}
+
+/* Global Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+/* App Container */
+.App {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 50%, #16213e 100%);
+  padding: 20px;
+}
+
+/* Card Styles */
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-color);
+  padding: 32px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.card-header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.card-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.card-subtitle {
+  font-size: 16px;
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+/* Button Styles */
+.btn {
+  padding: 14px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
+  font-family: inherit;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+  color: white;
+}
+
+.btn-success {
+  background: var(--accent-success);
+  color: white;
+}
+
+.btn-danger {
+  background: var(--accent-error);
+  color: white;
+}
+
+.btn-secondary {
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+/* Status Badge */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: var(--bg-card-hover);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  font-size: 18px;
+  color: var(--text-primary);
+  margin: 24px 0;
+}
+
+.status-badge.enrolled {
+  border-color: var(--accent-success);
+  background: rgba(74, 222, 128, 0.1);
+}
+
+.status-badge.not-enrolled {
+  border-color: var(--text-muted);
+}
+
+/* Camera Container */
+.camera-container {
+  position: relative;
+  width: 640px;
+  max-width: 100%;
+  height: 480px;
+  margin: 0 auto 32px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  background: #000;
+}
+
+/* Camera View Optimizations */
+.camera-view-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.camera-feed {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  background-color: #000;
+  /* GPU acceleration for smooth rendering */
+  transform: scaleX(-1) translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Remove any flickering during transforms */
+.camera-container,
+.camera-view-wrapper,
+.camera-feed {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure smooth animations */
+.face-guide-overlay,
+.camera-overlay-text {
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Instructions Section */
+.instructions {
+  text-align: center;
+  margin-top: 32px;
+}
+
+.instruction-text {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.instruction-subtext {
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+/* Progress Indicators */
+.progress-indicators {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin: 24px 0;
+  flex-wrap: wrap;
+}
+
+.pose-indicator {
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: capitalize;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.pose-indicator.completed {
+  background: rgba(74, 222, 128, 0.2);
+  color: var(--accent-success);
+  border-color: var(--accent-success);
+}
+
+.pose-indicator.active {
+  background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+  color: white;
+  box-shadow: 0 0 20px rgba(118, 75, 162, 0.4);
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.pose-indicator.pending {
+  background: var(--bg-card-hover);
+  color: var(--text-muted);
+  border-color: var(--border-color);
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(118, 75, 162, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(118, 75, 162, 0.6);
+  }
+}
+
+/* Action Buttons Container */
+.action-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+/* Captured Frames Preview */
+.captured-preview {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin: 32px 0;
+  flex-wrap: wrap;
+}
+
+.frame-preview {
+  text-align: center;
+}
+
+.frame-preview img {
+  width: 100px;
+  height: 80px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  border: 2px solid var(--accent-success);
+  box-shadow: var(--shadow-md);
+}
+
+.frame-preview span {
+  display: block;
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-transform: capitalize;
+}
+
+/* Error Message */
+.error-message {
+  margin-top: 24px;
+  padding: 16px 24px;
+  background: rgba(248, 113, 113, 0.1);
+  color: var(--accent-error);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--accent-error);
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Back Button */
+.back-button {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  padding: 12px 24px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
+  z-index: 1000;
+}
+
+.back-button:hover {
+  background: var(--bg-card-hover);
+  transform: translateX(-2px);
+}
+
+/* Verification Card - ensure proper spacing */
+.verification-card {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.verification-camera-wrapper {
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+/* Verification Status Overlay */
+.verification-status {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  text-align: center;
+  z-index: 15;
+  transition: all 0.3s ease;
+  min-width: 160px;
+  max-width: calc(100% - 24px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.verification-status.verified {
+  background: rgba(74, 222, 128, 0.95);
+  color: white;
+  border: 2px solid var(--accent-success);
+}
+
+.verification-status.not-verified {
+  background: rgba(248, 113, 113, 0.95);
+  color: white;
+  border: 2px solid var(--accent-error);
+}
+
+.verification-status.verifying {
+  background: linear-gradient(135deg, rgba(118, 75, 162, 0.9), rgba(0, 242, 254, 0.9));
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.status-icon {
+  font-size: 32px;
+  margin-bottom: 4px;
+}
+
+.status-text {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.confidence {
+  font-size: 14px;
+  opacity: 0.9;
+  font-weight: 400;
+}
+
+/* Loading State */
+.loading {
+  text-align: center;
+  padding: 50px;
+  color: var(--text-secondary);
+  font-size: 18px;
+}
+
+/* ===========================
+   INTRO SCREEN STYLES
+   =========================== */
+
+.enrollment-intro-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 20px;
+}
+
+.intro-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 50%, #16213e 100%);
+  z-index: 0;
+}
+
+.intro-card {
+  position: relative;
+  z-index: 1;
+  background: rgba(37, 37, 65, 0.8);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 64px 48px;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(118, 75, 162, 0.2);
+  text-align: center;
+}
+
+.face-icon-container {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 32px;
+  padding: 20px;
+  background: linear-gradient(135deg, rgba(118, 75, 162, 0.2), rgba(15, 76, 117, 0.2));
+  border-radius: 50%;
+  border: 2px solid rgba(118, 75, 162, 0.4);
+  box-shadow: 0 0 40px rgba(118, 75, 162, 0.3);
+}
+
+.face-icon {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 10px rgba(0, 242, 254, 0.5));
+}
+
+.intro-title {
+  font-size: 48px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+}
+
+.title-accent {
+  background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.intro-description {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 40px;
+  max-width: 360px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.intro-cta {
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto;
+  box-shadow: 0 8px 24px rgba(118, 75, 162, 0.4);
+}
+
+.intro-skip-link {
+  display: block;
+  margin-top: 24px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  font-family: inherit;
+}
+
+.intro-skip-link:hover {
+  color: var(--text-secondary);
+  text-decoration: underline;
+}
+
+/* ===========================
+   OVAL CAMERA MASKING
+   =========================== */
+
+.camera-oval-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  height: 600px;
+  margin: 0 auto 32px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.camera-oval-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* CRITICAL: Video with oval clip-path */
+.camera-feed-oval {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+  /* Oval mask applied via inline style clip-path */
+}
+
+/* Gradient background (visible outside oval) */
+.oval-background-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, 
+    rgba(15, 15, 30, 0.95) 0%, 
+    rgba(26, 26, 46, 0.95) 50%, 
+    rgba(22, 33, 62, 0.95) 100%
+  );
+  z-index: 1;
+}
+
+/* Dotted oval ring overlay */
+.oval-ring-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.oval-ring-animated {
+  animation: oval-pulse 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 8px rgba(0, 242, 254, 0.6));
+}
+
+.oval-ring-glow {
+  opacity: 0.5;
+  filter: blur(2px);
+}
+
+@keyframes oval-pulse {
+  0%, 100% {
+    opacity: 0.8;
+    stroke-width: 0.4;
+  }
+  50% {
+    opacity: 1;
+    stroke-width: 0.5;
+  }
+}
+
+/* Countdown with translucent background */
+.countdown-overlay-oval {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  pointer-events: none;
+}
+
+.countdown-circle-translucent {
+  width: 120px;
+  height: 120px;
+  background: rgba(118, 75, 162, 0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 40px rgba(118, 75, 162, 0.6), 0 0 80px rgba(118, 75, 162, 0.3);
+  animation: countdown-pulse 1s ease-in-out;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Enrollment card adjustments */
+.enrollment-card {
+  max-width: 1000px;
+}
+
+/* ===========================
+   SINGLE COLUMN ENROLLMENT
+   =========================== */
+
+.enrollment-single-column {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  gap: 16px;
+  max-width: 100%;
+}
+
+/* Header - Minimal Space */
+.enrollment-header-single {
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.enrollment-title-single {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.enrollment-subtitle-single {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* ===========================
+   CIRCULAR CAMERA DESIGN
+   =========================== */
+
+.camera-wrapper-single {
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+.camera-circle-container {
+  position: relative;
+  width: 100%;
+  /* Square aspect ratio for circle */
+  padding-bottom: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  background: rgba(26, 26, 46, 0.5);
+  border: 1px solid rgba(118, 75, 162, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Background gradient - same as before */
+.camera-bg-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, 
+    rgba(15, 15, 30, 0.96) 0%, 
+    rgba(26, 26, 46, 0.96) 50%, 
+    rgba(22, 33, 62, 0.96) 100%
+  );
+  z-index: 1;
+}
+
+/* Video - CIRCULAR clip */
+.camera-video-circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+  /* clip-path: circle(42% at 50% 50%) applied inline */
+}
+
+/* ===========================
+   FACIAL LANDMARK MESH
+   =========================== */
+
+.facial-mesh-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+  /* Below ring (z-index: 10) but above video (z-index: 2) */
+}
+
+/* Mesh lines animation - smaller size */
+.mesh-line {
+  animation: fade-in-line 1s ease-out forwards, pulse-line 3s ease-in-out infinite;
+  opacity: 0;
+  stroke-width: 0.1;
+}
+
+@keyframes fade-in-line {
+  from {
+    opacity: 0;
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+  }
+  to {
+    opacity: 0.6;
+    stroke-dasharray: 100;
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes pulse-line {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Landmark points animation */
+.mesh-point {
+  animation: fade-in-point 0.8s ease-out forwards, pulse-point 2s ease-in-out infinite;
+  opacity: 0;
+  transform-origin: center;
+}
+
+@keyframes fade-in-point {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse-point {
+  0%, 100% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Smaller mesh points */
+.mesh-point {
+  r: 0.5;
+}
+
+/* Dotted ring overlay */
+.camera-ring-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.ring-pulse-anim {
+  animation: ring-glow 2.5s ease-in-out infinite;
+  filter: drop-shadow(0 0 5px rgba(0, 242, 254, 0.5));
+}
+
+@keyframes ring-glow {
+  0%, 100% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Countdown */
+.camera-countdown {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+}
+
+.countdown-bubble {
+  width: 90px;
+  height: 90px;
+  background: linear-gradient(135deg, rgba(118, 75, 162, 0.4), rgba(0, 242, 254, 0.4));
+  backdrop-filter: blur(8px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 25px rgba(118, 75, 162, 0.3), 0 0 15px rgba(0, 242, 254, 0.25);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  animation: countdown-pulse 1s ease-in-out;
+}
+
+.countdown-num {
+  font-size: 50px;
+  font-weight: 800;
+  color: white;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes countdown-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* ===========================
+   INSTRUCTIONS & ACTIONS
+   =========================== */
+
+.instructions-single {
+  text-align: center;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+.instruction-title-single {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.instruction-subtitle-single {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* Capture Button */
+.btn-capture-single {
+  width: 100%;
+  max-width: 380px;
+  padding: 14px 32px;
+  font-size: 15px;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 16px rgba(118, 75, 162, 0.4);
+  font-family: inherit;
+}
+
+.btn-capture-single:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(118, 75, 162, 0.5);
+}
+
+.btn-capture-single:disabled,
+.btn-capture-single.btn-capturing {
+  background: var(--bg-card-hover);
+  color: var(--text-secondary);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Progress Dots */
+.progress-dots-single {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+/* Error Message */
+.error-message-single {
+  max-width: 380px;
+  padding: 10px 16px;
+  background: rgba(248, 113, 113, 0.1);
+  color: var(--accent-error);
+  border-radius: 10px;
+  border: 1px solid var(--accent-error);
+  font-size: 12px;
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* ===========================
+   COMPLETION STATE
+   =========================== */
+
+.completion-single {
+  text-align: center;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+.success-icon-single {
+  width: 56px;
+  height: 56px;
+  background: var(--accent-success);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  color: white;
+  margin: 0 auto 12px;
+  box-shadow: 0 0 18px rgba(74, 222, 128, 0.4);
+  animation: success-pop 0.5s ease-out;
+}
+
+/* Captured Frames Grid */
+.captured-grid-single {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  max-width: 380px;
+  margin: 16px auto;
+}
+
+.frame-item-single {
+  text-align: center;
+}
+
+.frame-item-single img {
+  width: 100%;
+  height: 50px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 2px solid var(--accent-success);
+  transform: scaleX(-1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.frame-item-single span {
+  display: block;
+  margin-top: 4px;
+  font-size: 9px;
+  color: var(--text-secondary);
+  text-transform: capitalize;
+}
+
+/* Action Buttons */
+.actions-single {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  max-width: 380px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.btn-secondary-single,
+.btn-success-single {
+  flex: 1;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.btn-secondary-single {
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.btn-secondary-single:hover {
+  background: var(--bg-card);
+  transform: translateY(-1px);
+}
+
+.btn-success-single {
+  background: var(--accent-success);
+  color: white;
+  box-shadow: 0 4px 12px rgba(74, 222, 128, 0.3);
+}
+
+.btn-success-single:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(74, 222, 128, 0.4);
+}
+
+.btn-success-single:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ===========================
+   COMPACT ENROLLMENT LAYOUT
+   =========================== */
+
+.enrollment-container-compact {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  max-width: 100%;
+}
+
+/* Header - Compact */
+.enrollment-header-compact {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.enrollment-title-compact {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.enrollment-subtitle-compact {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* Main Content - Two Column Layout */
+.enrollment-content-compact {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  justify-content: center;
+  max-width: 1100px;
+  width: 100%;
+}
+
+/* Camera Section - Optimized Size */
+.camera-section-compact {
+  flex: 0 0 auto;
+}
+
+/* Instructions Section - Right Side */
+.instructions-section-compact {
+  flex: 0 0 auto;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ===========================
+   ALIGNED OVAL CAMERA
+   =========================== */
+
+.camera-oval-container-aligned {
+  position: relative;
+  width: 420px;
+  height: 540px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 24px;
+  background: rgba(26, 26, 46, 0.6);
+  border: 1px solid rgba(118, 75, 162, 0.2);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Gradient background - perfectly sized */
+.oval-background-gradient-aligned {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, 
+    rgba(15, 15, 30, 0.95) 0%, 
+    rgba(26, 26, 46, 0.95) 50%, 
+    rgba(22, 33, 62, 0.95) 100%
+  );
+  z-index: 1;
+}
+
+/* Video with EXACT oval clip-path */
+.camera-feed-oval-aligned {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+  /* clip-path applied via inline style - MUST match ring dimensions */
+}
+
+/* Oval ring overlay - EXACT dimensions */
+.oval-ring-overlay-aligned {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.oval-ring-animated {
+  animation: oval-pulse 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 6px rgba(0, 242, 254, 0.6));
+}
+
+.oval-ring-glow {
+  opacity: 0.6;
+  filter: blur(1px);
+}
+
+@keyframes oval-pulse {
+  0%, 100% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Countdown - Aligned */
+.countdown-overlay-aligned {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  pointer-events: none;
+}
+
+.countdown-circle-aligned {
+  width: 100px;
+  height: 100px;
+  background: rgba(118, 75, 162, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 30px rgba(118, 75, 162, 0.6);
+  animation: countdown-pulse 1s ease-in-out;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.countdown-number-aligned {
+  font-size: 56px;
+  font-weight: 800;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* ===========================
+   COMPACT INSTRUCTIONS
+   =========================== */
+
+.instruction-block-compact {
+  text-align: center;
+}
+
+.instruction-primary-compact {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.instruction-secondary-compact {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Capture Button - Compact */
+.btn-capture-compact {
+  width: 100%;
+  padding: 16px 32px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Progress Dots - Compact */
+.progress-dots-compact {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* Completion State - Compact */
+.completion-header-compact {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.success-icon-compact {
+  width: 60px;
+  height: 60px;
+  background: var(--accent-success);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  color: white;
+  margin: 0 auto 16px;
+  box-shadow: 0 0 20px rgba(74, 222, 128, 0.4);
+  animation: success-pop 0.5s ease-out;
+}
+
+/* Captured Preview - Compact Grid */
+.captured-preview-compact {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.captured-preview-compact .frame-preview {
+  text-align: center;
+}
+
+.captured-preview-compact .frame-preview img {
+  width: 100%;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 2px solid var(--accent-success);
+  transform: scaleX(-1);
+}
+
+.captured-preview-compact .frame-label {
+  display: block;
+  margin-top: 4px;
+  font-size: 10px;
+  color: var(--text-secondary);
+  text-transform: capitalize;
+}
+
+/* Action Buttons - Compact */
+.action-buttons-compact {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.btn-compact {
+  padding: 12px 24px;
+  font-size: 14px;
+}
+
+/* Error Message - Compact */
+.error-message-compact {
+  padding: 12px 16px;
+  background: rgba(248, 113, 113, 0.1);
+  color: var(--accent-error);
+  border-radius: 8px;
+  border: 1px solid var(--accent-error);
+  font-size: 13px;
+  text-align: center;
+}
+
+/* Circular Mask Overlay */
+.circular-mask-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.circular-mask-svg,
+.circular-guide-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.guide-ring-stroke {
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+  animation: ring-pulse 3s ease-in-out infinite;
+}
+
+@keyframes ring-pulse {
+  0%, 100% {
+    opacity: 0.6;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.5));
+  }
+}
+
+/* Countdown Overlay */
+.countdown-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  pointer-events: none;
+}
+
+.countdown-circle {
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 40px rgba(118, 75, 162, 0.6), 0 0 80px rgba(118, 75, 162, 0.3);
+  animation: countdown-pulse 1s ease-in-out;
+}
+
+.countdown-number {
+  font-size: 64px;
+  font-weight: 800;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes countdown-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Enrollment Instructions */
+.enrollment-instructions {
+  text-align: center;
+  margin-top: 32px;
+  padding: 0 24px;
+}
+
+.instruction-block {
+  margin-bottom: 32px;
+}
+
+.instruction-primary {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.instruction-secondary {
+  font-size: 16px;
+  color: var(--text-secondary);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* Large Primary Button */
+.btn-large {
+  padding: 18px 48px;
+  font-size: 18px;
+  min-width: 200px;
+}
+
+.btn-capturing {
+  background: var(--bg-card-hover);
+  color: var(--text-secondary);
+  cursor: not-allowed;
+}
+
+/* Progress Dots */
+.progress-dots {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.progress-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.progress-dot.completed {
+  background: var(--accent-success);
+  box-shadow: 0 0 8px rgba(74, 222, 128, 0.5);
+}
+
+.progress-dot.active {
+  background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+  box-shadow: 0 0 12px rgba(118, 75, 162, 0.6);
+  animation: dot-pulse 1.5s ease-in-out infinite;
+}
+
+.progress-dot.pending {
+  background: var(--bg-card-hover);
+  border: 2px solid var(--border-color);
+}
+
+@keyframes dot-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+}
+
+/* Completion State */
+.completion-header {
+  margin-bottom: 32px;
+}
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  background: var(--accent-success);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  color: white;
+  margin: 0 auto 24px;
+  box-shadow: 0 0 24px rgba(74, 222, 128, 0.4);
+  animation: success-pop 0.5s ease-out;
+}
+
+@keyframes success-pop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Captured Preview - Updated */
+.captured-preview {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin: 32px 0;
+  flex-wrap: wrap;
+}
+
+.frame-preview {
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.frame-preview:hover {
+  transform: translateY(-4px);
+}
+
+.frame-preview img {
+  width: 100px;
+  height: 80px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  border: 2px solid var(--accent-success);
+  box-shadow: var(--shadow-md);
+  /* Mirror the preview images to match what user saw */
+  transform: scaleX(-1);
+}
+
+.frame-label {
+  display: block;
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-transform: capitalize;
+  font-weight: 500;
+}
+
+/* Action Buttons - Improved Spacing */
+.action-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .card {
+    padding: 24px 16px;
+  }
+  
+  .camera-container {
+    width: 100%;
+    height: 360px;
+  }
+  
+  .card-title {
+    font-size: 24px;
+  }
+  
+  .instruction-text {
+    font-size: 20px;
+  }
+  
+  .instruction-primary {
+    font-size: 22px;
+  }
+  
+  .instruction-primary-compact {
+    font-size: 20px;
+  }
+  
+  .instruction-secondary {
+    font-size: 14px;
+  }
+  
+  .instruction-secondary-compact {
+    font-size: 13px;
+  }
+  
+  .btn-large {
+    padding: 16px 36px;
+    font-size: 16px;
+    min-width: 160px;
+  }
+  
+  .countdown-circle {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .countdown-number {
+    font-size: 56px;
+  }
+  
+  .countdown-circle-translucent {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .countdown-circle-aligned {
+    width: 90px;
+    height: 90px;
+  }
+  
+  .countdown-number-aligned {
+    font-size: 48px;
+  }
+  
+  .success-icon {
+    width: 64px;
+    height: 64px;
+    font-size: 36px;
+  }
+  
+  .success-icon-compact {
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+  }
+  
+  .intro-card {
+    padding: 48px 32px;
+  }
+  
+  .intro-title {
+    font-size: 36px;
+  }
+  
+  .face-icon-container {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .camera-oval-wrapper {
+    height: 500px;
+  }
+  
+  .camera-oval-container-aligned {
+    width: 100%;
+    max-width: 380px;
+    height: 480px;
+  }
+  
+  .enrollment-content-compact {
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .instructions-section-compact {
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .enrollment-title-compact {
+    font-size: 24px;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .action-buttons-compact {
+    flex-direction: column;
+  }
+  
+  .btn {
+    width: 100%;
+  }
+}
+
+/* ===========================
+   MOBILE OPTIMIZATIONS
+   =========================== */
+
+@media (max-width: 480px) {
+  .enrollment-single-column {
+    padding: 12px;
+    gap: 12px;
+  }
+  
+  .enrollment-title-single {
+    font-size: 22px;
+  }
+  
+  .enrollment-subtitle-single {
+    font-size: 12px;
+  }
+  
+  .camera-wrapper-single {
+    max-width: 100%;
+  }
+  
+  .camera-circle-container {
+    border-radius: 20px;
+    /* Ensure proper rendering on mobile */
+    min-height: 0;
+  }
+  
+  /* Reduce mesh complexity on mobile for performance */
+  .mesh-line {
+    stroke-width: 0.08;
+  }
+  
+  .mesh-point {
+    r: 0.4;
+  }
+  
+  /* Slower animations on mobile */
+  .mesh-line {
+    animation-duration: 1.5s, 4s;
+  }
+  
+  .mesh-point {
+    animation-duration: 1s, 3s;
+  }
+  
+  .countdown-bubble {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .countdown-num {
+    font-size: 44px;
+  }
+  
+  .instruction-title-single {
+    font-size: 18px;
+  }
+  
+  .instruction-subtitle-single {
+    font-size: 12px;
+  }
+  
+  .btn-capture-single {
+    max-width: 100%;
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+  
+  .countdown-bubble {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .countdown-num {
+    font-size: 44px;
+  }
+  
+  .captured-grid-single {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+  
+  .frame-item-single img {
+    height: 45px;
+  }
+  
+  .frame-item-single span {
+    font-size: 8px;
+  }
+  
+  .actions-single {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .btn-secondary-single,
+  .btn-success-single {
+    width: 100%;
+  }
+  
+  .intro-card {
+    padding: 40px 24px;
+  }
+  
+  .intro-title {
+    font-size: 32px;
+  }
+  
+  .camera-oval-wrapper {
+    height: 450px;
+  }
+  
+  .camera-oval-container-aligned {
+    height: 420px;
+  }
+  
+  .captured-preview-compact {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 360px) {
+  .enrollment-title-single {
+    font-size: 20px;
+  }
+  
+  .instruction-title-single {
+    font-size: 17px;
+  }
+}
+
+/* Landscape mobile */
+@media (max-height: 600px) and (orientation: landscape) {
+  .enrollment-single-column {
+    padding: 8px;
+    gap: 8px;
+  }
+  
+  .camera-circle-container {
+    max-width: 350px;
+    margin: 0 auto;
+  }
+  
+  .enrollment-header-single {
+    margin-bottom: 0;
+  }
+  
+  .instruction-title-single {
+    font-size: 16px;
+  }
+  
+  .instruction-subtitle-single {
+    font-size: 11px;
+  }
+  
+  .btn-capture-single {
+    padding: 10px 24px;
+  }
+}
+
+/* Desktop - slightly larger */
+@media (min-width: 768px) {
+  .camera-wrapper-single {
+    max-width: 480px;
+  }
+}
+
+/* High refresh rate displays - smoother animation */
+@media (prefers-reduced-motion: no-preference) {
+  .ring-pulse-anim {
+    will-change: opacity;
+  }
+  
+  .mesh-line,
+  .mesh-point {
+    will-change: opacity, transform;
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .ring-pulse-anim {
+    animation: none;
+  }
+  
+  .mesh-line,
+  .mesh-point {
+    animation: none;
+    opacity: 0.6;
+  }
+  
+  .mesh-line {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+  }
+  
+  .mesh-point {
+    transform: scale(1);
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .mesh-line {
+    stroke: white;
+    opacity: 0.8;
+  }
+  
+  .mesh-point {
+    fill: white;
+  }
+}
+
+/* Desktop - still single column, just constrained width */
+@media (min-width: 768px) {
+  .enrollment-single-column {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+}
+
+/* Remove old styles that conflict */
+.enrollment-content-compact,
+.camera-section-compact,
+.instructions-section-compact,
+.enrollment-container-compact {
+  display: none !important;
+}
