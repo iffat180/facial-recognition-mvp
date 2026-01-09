@@ -1,6 +1,7 @@
 import { CapturedFrame, EnrollmentResponse, VerificationResponse, StatusResponse } from '../types';
 
-const API_BASE = 'http://localhost:8000';
+// Use production URL if available, fallback to localhost for development
+const API_BASE = process.env.REACT_APP_API_URL || 'https://facial-recognition-mvp.onrender.com';
 
 export const enrollUser = async (frames: CapturedFrame[]): Promise<EnrollmentResponse> => {
   const response = await fetch(`${API_BASE}/enroll`, {
