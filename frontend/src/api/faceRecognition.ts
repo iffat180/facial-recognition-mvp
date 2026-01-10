@@ -2,7 +2,21 @@ import { CapturedFrame, EnrollmentResponse, VerificationResponse, StatusResponse
 
 // Use production URL if available, fallback to localhost for development
 // Backend deployed on Railway
-const API_BASE = process.env.REACT_APP_API_URL || 'https://facial-recognition-mvp-production.up.railway.app';
+// Ensure URL is always absolute (starts with http:// or https://)
+const getApiBase = (): string => {
+  const envUrl = process.env.REACT_APP_API_URL;
+  const defaultUrl = 'https://facial-recognition-mvp-production.up.railway.app';
+  const url = envUrl || defaultUrl;
+  
+  // Ensure absolute URL
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return url;
+  }
+  // If relative, prepend https://
+  return `https://${url}`;
+};
+
+const API_BASE = getApiBase();
 
 export const enrollUser = async (frames: CapturedFrame[]): Promise<EnrollmentResponse> => {
   // Create AbortController for timeout (3 minutes)
