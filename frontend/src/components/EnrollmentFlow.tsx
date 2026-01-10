@@ -97,18 +97,21 @@ export const EnrollmentFlow: React.FC<{ onComplete: () => void }> = ({ onComplet
       const result = await enrollUser(capturedFrames);
       
       if (result.success) {
+        // Success! Navigate to verification
+        setIsProcessing(false);
         onComplete();
       } else {
+        // Enrollment returned success:false
         setError(result.message || 'Enrollment failed. Please try again.');
-        handleRetake();
+        setIsProcessing(false);
+        // Don't auto-retake, let user decide
       }
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Network error. Make sure the backend is running.';
       setError(errorMessage);
       console.error('Enrollment error:', err);
-      handleRetake();
-    } finally {
       setIsProcessing(false);
+      // Don't auto-retake on error, let user see the error and decide
     }
   };
 
@@ -212,8 +215,22 @@ export const EnrollmentFlow: React.FC<{ onComplete: () => void }> = ({ onComplet
           {/* Processing status message */}
           {isProcessing && (
             <p className="processing-note">
-              Please wait... This may take 1-2 minutes on first use.
+              Please wait... This may take 1-2 minutes on first use while models download.
             </p>
+          )}
+          
+          {/* Error Display (if enrollment failed but we're still on review screen) */}
+          {error && !isProcessing && (
+            <div className="error-message-single" style={{ marginTop: '16px' }}>
+              {error}
+              <button 
+                onClick={handleRetake} 
+                className="btn-secondary-single" 
+                style={{ marginTop: '12px', width: '100%' }}
+              >
+                Try Again
+              </button>
+            </div>
           )}
         </>
       )}

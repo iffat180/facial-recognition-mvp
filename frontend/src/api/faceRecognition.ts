@@ -5,18 +5,33 @@ import { CapturedFrame, EnrollmentResponse, VerificationResponse, StatusResponse
 const API_BASE = process.env.REACT_APP_API_URL || 'https://facial-recognition-mvp-production.up.railway.app';
 
 export const enrollUser = async (frames: CapturedFrame[]): Promise<EnrollmentResponse> => {
-  const response = await fetch(`${API_BASE}/enroll`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ frames })
-  });
+  // Create AbortController for timeout (3 minutes)
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 180000); // 3 minutes
   
-  if (!response.ok) {
-    const errorData = await response.json().catch(() => ({ detail: 'Enrollment failed' }));
-    throw new Error(errorData.detail || `Enrollment failed: ${response.status} ${response.statusText}`);
+  try {
+    const response = await fetch(`${API_BASE}/enroll`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ frames }),
+      signal: controller.signal
+    });
+    
+    clearTimeout(timeoutId);
+    
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({ detail: 'Enrollment failed' }));
+      throw new Error(errorData.detail || `Enrollment failed: ${response.status} ${response.statusText}`);
+    }
+    
+    return response.json();
+  } catch (error: any) {
+    clearTimeout(timeoutId);
+    if (error.name === 'AbortError') {
+      throw new Error('Request timed out. This may take 1-2 minutes on first use. Please try again.');
+    }
+    throw error;
   }
-  
-  return response.json();
 };
 
 export const verifyUser = async (image: string): Promise<VerificationResponse> => {
